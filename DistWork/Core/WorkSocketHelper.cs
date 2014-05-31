@@ -11,12 +11,12 @@ namespace DistWork.Core
 {
     public static class WorkSocketHelper
     {
-        public static void SendWork(this Socket socket, IWork work)
+        public static bool SendWork(this Socket socket, IWork work)
         {
-            SendWork(new[] {socket}, work);
+            return SendWork(new[] {socket}, work) == 1;
         }
 
-        public static void SendWork(this IEnumerable<Socket> sockets, IWork work)
+        public static int SendWork(this IEnumerable<Socket> sockets, IWork work)
         {
             using (var stream = new MemoryStream())
             {
@@ -30,8 +30,16 @@ namespace DistWork.Core
                 lengthWriter.Write((int)(stream.Length - sizeof(int)));
 
                 var bytes = stream.ToArray();
-                var tasks = sockets.Select(socket => socket.SendAsync(bytes)).Cast<Task>().ToList();
-                Task.WaitAll(tasks.ToArray());
+                var tasks = sockets.Select(socket => socket.SendAsync(bytes)).ToList();
+                try
+                {
+                    Task.WaitAll(tasks.Cast<Task>().ToArray());
+                }
+                catch (Exception)
+                {
+                    return tasks.Count(e => e.IsCompleted);
+                }
+                return tasks.Count();
             }
         }
 

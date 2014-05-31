@@ -9,7 +9,11 @@ namespace DistWork.Core
         public readonly IWork Work;
         private readonly SocketContainer _container;
 
-        internal DistributeContext(SocketContainer container, IList<KeyValuePair<Socket, SocketInformation>> sockets, IWork work)
+        internal DistributeContext(SocketContainer container,
+                                   IList
+                                       <KeyValuePair<Socket, SocketInformation>>
+                                       sockets,
+                                   IWork work)
         {
             _container = container;
             Sockets = sockets;

@@ -6,7 +6,9 @@ namespace DistWork.Util
     {
         public static void Write(string format, params object[] args)
         {
-            var message = args == null || args.Length == 0 ? format : string.Format(format, args);
+            var message = args == null || args.Length == 0
+                              ? format
+                              : string.Format(format, args);
             var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             lock (Console.Out)
             {

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{65E22A81-A24A-4F96-B587-1C8CE614CAB6}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{C1037566-0120-406E-8AB7-34B9B7D7A559}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DistWork</RootNamespace>
-    <AssemblyName>DistWork</AssemblyName>
+    <RootNamespace>DistSlave</RootNamespace>
+    <AssemblyName>DistSlave</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,9 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,19 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\FileSendWork.cs" />
-    <Compile Include="Core\RpcWork.cs" />
-    <Compile Include="Util\AsyncSocketExtension.cs" />
-    <Compile Include="Core\DistributeContext.cs" />
-    <Compile Include="Core\IWork.cs" />
-    <Compile Include="Util\LockExtension.cs" />
-    <Compile Include="Util\Logger.cs" />
-    <Compile Include="Core\Master.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\Slave.cs" />
-    <Compile Include="Core\SocketContainer.cs" />
-    <Compile Include="Core\SocketInformation.cs" />
-    <Compile Include="Core\WorkSocketHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DistWork\DistWork.csproj">
+      <Project>{65e22a81-a24a-4f96-b587-1c8ce614cab6}</Project>
+      <Name>DistWork</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

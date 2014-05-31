@@ -11,20 +11,23 @@ namespace DistWork.Util
         {
             var source = new TaskCompletionSource<Socket>(socket);
             socket.BeginAccept(state =>
-            {
-                try
                 {
-                    source.SetResult(socket.EndAccept(state));
-                }
-                catch (Exception e)
-                {
-                    source.SetException(e);
-                }
-            }, source);
+                    try
+                    {
+                        source.SetResult(socket.EndAccept(state));
+                    }
+                    catch (Exception e)
+                    {
+                        source.SetException(e);
+                    }
+                }, source);
             return source.Task;
         }
 
-        public static Task<int> ReceiveAsync(this Socket socket, byte[] buffer, int offset = 0, int size = -1, SocketFlags flags = SocketFlags.None)
+        public static Task<int> ReceiveAsync(this Socket socket, byte[] buffer,
+                                             int offset = 0, int size = -1,
+                                             SocketFlags flags =
+                                                 SocketFlags.None)
         {
             if (size < 0)
                 size = buffer.Length;
@@ -44,7 +47,8 @@ namespace DistWork.Util
             return source.Task;
         }
 
-        public static async Task<byte[]> ReceiveAsync(this Socket socket, int count)
+        public static async Task<byte[]> ReceiveAsync(this Socket socket,
+                                                      int count)
         {
             if (count == 0)
                 return new byte[0];
@@ -67,7 +71,9 @@ namespace DistWork.Util
             return buffer;
         }
 
-        public static Task<int> SendAsync(this Socket socket, byte[] buffer, int offset = 0, int size = -1, SocketFlags flags = SocketFlags.None)
+        public static Task<int> SendAsync(this Socket socket, byte[] buffer,
+                                          int offset = 0, int size = -1,
+                                          SocketFlags flags = SocketFlags.None)
         {
             if (size < 0)
                 size = buffer.Length;

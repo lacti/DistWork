@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace DistWork.Util
 {
     public static class LockExtension
     {
-        public static void DoReadLock(this ReaderWriterLockSlim locker, Action action)
+        public static void DoReadLock(this ReaderWriterLockSlim locker,
+                                      Action action)
         {
             locker.EnterReadLock();
             try
@@ -22,7 +19,8 @@ namespace DistWork.Util
             }
         }
 
-        public static T DoReadLock<T>(this ReaderWriterLockSlim locker, Func<T> functor)
+        public static T DoReadLock<T>(this ReaderWriterLockSlim locker,
+                                      Func<T> functor)
         {
             locker.EnterReadLock();
             T returnValue;
@@ -37,7 +35,8 @@ namespace DistWork.Util
             return returnValue;
         }
 
-        public static void DoWriteLock(this ReaderWriterLockSlim locker, Action action)
+        public static void DoWriteLock(this ReaderWriterLockSlim locker,
+                                       Action action)
         {
             locker.EnterWriteLock();
             try
@@ -50,7 +49,8 @@ namespace DistWork.Util
             }
         }
 
-        public static T DoWriteLock<T>(this ReaderWriterLockSlim locker, Func<T> functor)
+        public static T DoWriteLock<T>(this ReaderWriterLockSlim locker,
+                                       Func<T> functor)
         {
             locker.EnterWriteLock();
             T returnValue;
@@ -64,6 +64,5 @@ namespace DistWork.Util
             }
             return returnValue;
         }
-
     }
 }
